@@ -1,0 +1,24 @@
+| name    | age | gender | score |
+| ------- | --- | ------ | ----- |
+| Alice   | 20  | F      | 85    |
+| Bob     | NaN | M      | 78    |
+| Charlie | 23  | M      | NaN   |
+| Alice   | 20  | F      | 85    |
+| David   | 22  | M      | 90    |
+import pandas as pd
+
+# Step 1: Load the dataset
+df = pd.read_csv("students.csv")
+
+# Step 2: Remove duplicate rows
+df = df.drop_duplicates()
+
+# Step 3: Fill missing values
+df['age'] = df['age'].fillna(df['age'].mean())      # Fill missing age with average
+df['score'] = df['score'].fillna(df['score'].mean())  # Fill missing score with average
+
+# Step 4: Encode 'gender' (F=0, M=1)
+df['gender'] = df['gender'].map({'F': 0, 'M': 1})
+
+# Step 5: Print the cleaned DataFrame
+print(df)
